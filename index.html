@@ -5,26 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สื่อการสอนเต็มจอ</title>
     <style>
-        /* ตั้งค่าให้ทุกอย่างเต็มจอและไม่มีขอบ */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
         }
-        /* สร้างพื้นที่สำหรับ iframe และปุ่ม */
         #fullscreen-wrapper {
             position: relative;
             width: 100%;
             height: 100%;
         }
-        /* ตั้งค่า iframe ให้เต็มพื้นที่ */
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-        /* สไตล์ของปุ่มกด */
         #fullscreen-btn {
             position: absolute;
             top: 50%;
@@ -39,14 +35,15 @@
             border: 2px solid white;
             border-radius: 10px;
             cursor: pointer;
-            z-index: 10; /* ให้ปุ่มอยู่ด้านหน้า iframe */
+            z-index: 10;
         }
     </style>
 </head>
 <body>
 
 <div id="fullscreen-wrapper">
-    <iframe src="https://atrmutrac-my.sharepoint.com/personal/sansane_tha_outlook_rmutr_ac_th/_layouts/15/Doc.aspx?sourcedoc={b0c46a0a-06fa-4e5e-84cd-cd47d00129c5}&amp;action=embedview&amp;wdAr=1.7777777777777777" allowfullscreen title="1. เรื่อง ทบทวนจำนวนนับ1ถึง20 และ 0"></iframe>
+    <iframe src="https://atrmutrac-my.sharepoint.com/personal/sansane_tha_outlook_rmutr_ac_th/_layouts/15/Doc.aspx?sourcedoc={b0c46a0a-06fa-4e5e-84cd-cd47d00129c5}&amp;action=embedview&amp;wdAr=1.7777777777777777" " allowfullscreen title="สื่อการสอน"></iframe>
+    
     <button id="fullscreen-btn">คลิกเพื่อแสดงผลเต็มจอ</button>
 </div>
 
@@ -54,30 +51,24 @@
     const wrapper = document.getElementById('fullscreen-wrapper');
     const button = document.getElementById('fullscreen-btn');
 
-    // เมื่อกดปุ่ม
     button.addEventListener('click', () => {
-        // สั่งให้ element ที่ครอบ iframe (wrapper) แสดงผลเต็มจอ
         if (wrapper.requestFullscreen) {
             wrapper.requestFullscreen();
-        } else if (wrapper.webkitRequestFullscreen) { /* สำหรับ Safari, Chrome */
+        } else if (wrapper.webkitRequestFullscreen) {
             wrapper.webkitRequestFullscreen();
-        } else if (wrapper.msRequestFullscreen) { /* สำหรับ IE11 */
+        } else if (wrapper.msRequestFullscreen) {
             wrapper.msRequestFullscreen();
         }
     });
     
-    // ซ่อนปุ่มเมื่อเข้าสู่โหมดเต็มจอแล้ว
     document.addEventListener('fullscreenchange', () => {
         if (document.fullscreenElement) {
-            button.style.display = 'none'; // ซ่อนปุ่ม
+            button.style.display = 'none';
         } else {
-            button.style.display = 'block'; // แสดงปุ่มอีกครั้งเมื่อออกจากโหมดเต็มจอ
+            button.style.display = 'block';
         }
     });
 </script>
 
 </body>
-
 </html>
-
-
