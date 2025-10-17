@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สื่อการสอนเต็มจอ</title>
+    <style>
+        /* ตั้งค่าให้ทุกอย่างเต็มจอและไม่มีขอบ */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        /* สร้างพื้นที่สำหรับ iframe และปุ่ม */
+        #fullscreen-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        /* ตั้งค่า iframe ให้เต็มพื้นที่ */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* สไตล์ของปุ่มกด */
+        #fullscreen-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            font-size: 20px;
+            font-family: sans-serif;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 10; /* ให้ปุ่มอยู่ด้านหน้า iframe */
+        }
+    </style>
+</head>
+<body>
+
+<div id="fullscreen-wrapper">
+    <iframe src="https://atrmutrac-my.sharepoint.com/personal/sansane_tha_outlook_rmutr_ac_th/_layouts/15/embed.aspx?UniqueId=b0c46a0a-06fa-4e5e-84cd-cd47d00129c5" allowfullscreen title="1. เรื่อง ทบทวนจำนวนนับ1ถึง20 และ 0"></iframe>
+    <button id="fullscreen-btn">คลิกเพื่อแสดงผลเต็มจอ</button>
+</div>
+
+<script>
+    const wrapper = document.getElementById('fullscreen-wrapper');
+    const button = document.getElementById('fullscreen-btn');
+
+    // เมื่อกดปุ่ม
+    button.addEventListener('click', () => {
+        // สั่งให้ element ที่ครอบ iframe (wrapper) แสดงผลเต็มจอ
+        if (wrapper.requestFullscreen) {
+            wrapper.requestFullscreen();
+        } else if (wrapper.webkitRequestFullscreen) { /* สำหรับ Safari, Chrome */
+            wrapper.webkitRequestFullscreen();
+        } else if (wrapper.msRequestFullscreen) { /* สำหรับ IE11 */
+            wrapper.msRequestFullscreen();
+        }
+    });
+    
+    // ซ่อนปุ่มเมื่อเข้าสู่โหมดเต็มจอแล้ว
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            button.style.display = 'none'; // ซ่อนปุ่ม
+        } else {
+            button.style.display = 'block'; // แสดงปุ่มอีกครั้งเมื่อออกจากโหมดเต็มจอ
+        }
+    });
+</script>
+
+</body>
+</html>
